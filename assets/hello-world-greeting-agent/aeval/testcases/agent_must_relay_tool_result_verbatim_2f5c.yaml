@@ -1,0 +1,21 @@
+id: agent_must_relay_tool_result_verbatim_2f5c
+description: 'Agent must relay the greet tool result directly in its response without modifying or embellishing it'
+test_steps:
+  - type: dynamic_conversation
+    user_agent:
+      task_summary: |
+        You are a developer testing the agent template. You send: "Greet me, my name is Charlie."
+        You want to verify that the agent calls the greet tool and returns the result without adding unsolicited extra information.
+    max_turns: 3
+    agent_response_validations:
+      - check: 'The agent''s final response must include "Hello, Charlie!" — the exact output of the greet tool'
+      - check: 'The agent must not add lengthy explanations, disclaimers, or extra content beyond the greeting'
+    rule_compliance_validations:
+      - check: 'The agent must call greet with name "Charlie" and include the tool result in its response'
+      - check: 'WHEN the greet tool returns a result, the agent MUST relay it without modification'
+    tool_validations:
+      expected_tool_calls:
+        - tool: greet
+          parameters:
+            name:
+              value: '<greet_name:Charlie>'

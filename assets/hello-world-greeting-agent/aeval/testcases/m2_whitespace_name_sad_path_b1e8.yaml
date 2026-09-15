@@ -1,0 +1,15 @@
+id: m2_whitespace_name_sad_path_b1e8
+description: 'M2 Sad Path: user sends whitespace or blank as their name — agent must return generic greeting, not an error or fabricated name'
+test_steps:
+  - type: dynamic_conversation
+    user_agent:
+      task_summary: |
+        You are a user who sends the message: "My name is     " (several blank spaces).
+        You expect the agent to handle this gracefully and return a generic greeting without crashing.
+    max_turns: 3
+    agent_response_validations:
+      - check: 'The agent''s final response must be a greeting — either "Hello!" or similar — and must not return an error message'
+      - check: 'The agent must not fabricate a name to fill the blank'
+    rule_compliance_validations:
+      - check: 'The agent must not pass a whitespace-only string as a meaningful name to the greet tool'
+      - check: 'The agent must handle blank input gracefully without throwing an unhandled exception'

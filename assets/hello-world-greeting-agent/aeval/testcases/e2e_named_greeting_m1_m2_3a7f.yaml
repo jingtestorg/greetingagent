@@ -1,0 +1,23 @@
+id: e2e_named_greeting_m1_m2_3a7f
+description: 'E2E Happy Path: user provides their name and receives a personalized greeting - validates M1 (agent running) and M2 (greeting tool works correctly)'
+test_steps:
+  - type: dynamic_conversation
+    user_agent:
+      task_summary: |
+        You are a developer attending a demo of the Hello World Greeting Agent.
+        You send the message: "Hi, my name is Alice."
+        You expect the agent to respond with a personalized greeting containing your name.
+    max_turns: 3
+    agent_response_validations:
+      - check: 'The agent''s final response must contain "Hello, Alice!" or equivalent personalized greeting with the name Alice'
+      - check: 'The agent must not ask follow-up questions — it should greet immediately'
+      - check: 'The agent must not produce an error message or apology'
+    rule_compliance_validations:
+      - check: 'The agent must call the greet tool with name "Alice"'
+      - check: 'The agent must not call any tool other than greet'
+    tool_validations:
+      expected_tool_calls:
+        - tool: greet
+          parameters:
+            name:
+              value: '<greet_name:Alice>'

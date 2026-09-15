@@ -1,0 +1,19 @@
+id: business_outcome_demo_error_rate_8a1d
+description: 'Business Outcome: agent must complete greeting requests without errors, advancing demo error rate toward the target of 0 errors in AI Agent capability demonstration'
+test_steps:
+  - type: dynamic_conversation
+    user_agent:
+      task_summary: |-
+        You are a demo attendee watching a live demonstration of the Hello World Greeting Agent.
+        You send: "Hi! My name is Diana."
+        Success means the agent completes the greeting with zero errors and no apology messages,
+        demonstrating the target demo error rate of 0 errors in AI Agent capability demonstration.
+    max_turns: 3
+    agent_response_validations:
+      - check: The agent must return "Hello, Diana!" or a clear personalized greeting — no error messages, no apologies, no failure notices
+      - check: The agent response must demonstrate zero-error completion, consistent with the demo error rate target of 0 errors in AI Agent capability demonstration
+    rule_compliance_validations:
+      - check: The agent must successfully call the greet tool and return its result without any unhandled exceptions
+      - check: '[BUSINESS_METRIC: Demo error rate] The agent must complete the greeting interaction without errors, advancing toward the 0-errors target'
+    tool_call_validations:
+      - check: optional tools

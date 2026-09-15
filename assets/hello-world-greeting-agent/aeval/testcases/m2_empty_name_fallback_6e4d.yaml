@@ -1,0 +1,15 @@
+id: m2_empty_name_fallback_6e4d
+description: 'M2 Sad Path: user provides no name — agent must fall back to generic greeting "Hello!" without errors'
+test_steps:
+  - type: dynamic_conversation
+    user_agent:
+      task_summary: |
+        You are a user who sends the message: "Hello there!" without providing your name.
+        You expect the agent to still respond with a polite, generic greeting.
+    max_turns: 3
+    agent_response_validations:
+      - check: 'The agent''s final response must contain a greeting such as "Hello!" — it must not return an error or ask for a name repeatedly'
+      - check: 'The agent must not fabricate a name or assume who the user is'
+    rule_compliance_validations:
+      - check: 'If the agent calls greet, it must pass an empty or absent name — it must not invent a name to pass as the parameter'
+      - check: 'The agent must not produce an unhandled error when no name is present'

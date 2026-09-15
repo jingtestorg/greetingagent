@@ -1,0 +1,22 @@
+id: business_outcome_greeting_response_time_5e2f
+description: 'Business Outcome: agent must return the greeting response promptly, advancing toward the sub-second response time target in User interaction'
+test_steps:
+  - type: dynamic_conversation
+    user_agent:
+      task_summary: |
+        You are a developer validating the agent''s responsiveness during a live demo.
+        You send: "My name is Eve. Please greet me."
+        You expect an immediate, complete greeting in the very first response turn — no loading messages or follow-up turns required.
+    max_turns: 2
+    agent_response_validations:
+      - check: 'The agent must return the complete greeting "Hello, Eve!" in its first response without requiring multiple turns'
+      - check: 'The agent must not return a "processing" or "please wait" intermediate message as its final answer'
+      - check: '[BUSINESS_METRIC: Greeting response time] The agent must deliver the greeting in a single response turn, consistent with the sub-second response time target in User interaction'
+    rule_compliance_validations:
+      - check: 'The agent must call greet with name "Eve" and respond in the same turn — no multi-turn delays'
+    tool_validations:
+      expected_tool_calls:
+        - tool: greet
+          parameters:
+            name:
+              value: '<greet_name:Eve>'

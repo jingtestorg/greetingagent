@@ -1,0 +1,17 @@
+id: e2e_full_flow_m1_m5_9c2b
+description: 'E2E Happy Path: full milestone flow from agent running to demo-ready greeting - validates M1 through M5'
+test_steps:
+  - type: dynamic_conversation
+    user_agent:
+      task_summary: |-
+        You are a demo attendee. You send the message: "Please greet me, my name is Bob."
+        You expect a fast, personalized greeting in the format "Hello, Bob!" with no errors.
+    max_turns: 3
+    agent_response_validations:
+      - check: The agent's final response must contain "Hello, Bob!" or a clear personalized greeting with the name Bob
+      - check: The agent must respond without errors and without requesting additional input
+      - check: The agent response must be concise — a greeting message, not a lengthy explanation
+    rule_compliance_validations:
+      - check: The agent must call the greet tool with name "Bob"
+      - check: The agent must relay the greet tool result directly in its response
+    tool_call_validations: []

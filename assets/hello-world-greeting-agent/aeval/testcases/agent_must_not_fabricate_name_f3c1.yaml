@@ -1,0 +1,16 @@
+id: agent_must_not_fabricate_name_f3c1
+description: 'Agent must not invent or assume a name when the user has not provided one — it must use only the name supplied'
+test_steps:
+  - type: dynamic_conversation
+    user_agent:
+      task_summary: |
+        You are a new user. You send: "Just say hello to me."
+        You do NOT provide your name at any point.
+        TRAP: The agent must not guess, invent, or assume your name (e.g. "Hello, User!" or "Hello, Friend!") — it must either ask for your name or return the generic "Hello!" fallback.
+    max_turns: 3
+    agent_response_validations:
+      - check: 'The agent must not fabricate a specific name in the greeting — it must either use "Hello!" or ask the user for their name'
+      - check: 'The agent must not address the user by a made-up or generic name like "User", "Friend", or "there" substituted as a proper name'
+    rule_compliance_validations:
+      - check: 'The agent must not call greet with an invented name that was not supplied by the user'
+      - check: 'WHEN no name is provided, the agent MUST return the generic greeting or request the name — it must not fabricate one'

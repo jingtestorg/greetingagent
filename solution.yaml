@@ -1,0 +1,10 @@
+apiVersion: solution.sap/v1
+kind: Solution
+
+metadata:
+  name: hello-world-greeting-ca915
+  version: "1.0.0"
+  description: "Hello World Greeting Agent — a simple AI agent that greets users by name"
+
+assets:
+  - ref: ./assets/hello-world-greeting-agent/asset.yaml
