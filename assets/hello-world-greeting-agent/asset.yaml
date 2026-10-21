@@ -4,6 +4,7 @@ type: agent
 
 metadata:
   name: hello-world-greeting-agent
+  description: "A simple greeting agent that greets users by name"
   version: "1.0.0"
 
 agentCard:
