@@ -24,7 +24,7 @@ provides:
   apis:
     - name: hello-world-greeting-agent
       kind: a2a
-      ordId: customer.build:apiResource:hello-world-greeting-ca915.hello-world-greeting-agent:v1
+      ordId: customer.build:apiResource:hello-world-greeting-ca916.hello-world-greeting-agent:v1
 
 probes:
   startup:
